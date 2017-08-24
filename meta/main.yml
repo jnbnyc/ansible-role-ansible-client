@@ -1,0 +1,28 @@
+---
+
+allow_duplicates: yes
+dependencies:
+  -
+    src: https://github.com/jnbnyc/ansible-role-service-account.git
+    name: service-account
+    service_account_opts:
+      user: "{{ ansible_user }}"
+      group: "{{ ansible_group }}"
+      comment: "Ansible User"
+    tags: ansible-client
+
+galaxy_info:
+  author: jnbnyc
+  description: This role adds the `ansible` user and manages it's authorized_keys.
+  license: MIT
+  min_ansible_version: 2.3.2.0
+
+  # platforms is a list of platforms, and each platform has a name and a list of versions.
+  #
+  # platforms:
+  # - name: Fedora
+  #   versions:
+  #   - all
+  #   - 25
+
+  galaxy_tags: []

@@ -1,0 +1,45 @@
+---
+
+- name: Installing Libraries for ansible
+  become: yes
+  pip:
+    name: "{{ item }}"
+    state: present
+  register: pip_out
+  with_items:
+    - httplib2
+    - python-crest
+  tags: ansible-client
+
+- name: Installing Keys for ansible user
+  become: yes
+  authorized_key: user="{{ ansible_user }}" key="{{ lookup('file', item) }}"
+  with_fileglob:
+    - "../../files/{{ ansible_user }}/*.pub"
+  tags: ansible-client
+
+- name: Ensure /etc/sudoers.d exists
+  become: yes
+  file:
+    path: /etc/sudoers.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+  tags: ansible-client
+
+- name: Ensure includedir of /etc/sudoers.d
+  become: yes
+  lineinfile:
+    name: /etc/sudoers
+    regexp: "^#includedir"
+    line: "#includedir /etc/sudoers.d"
+    state: present
+  tags: ansible-client
+
+- name: Create sudoers configuration
+  become: yes
+  template:
+    src: sudoers.j2
+    dest: "/etc/sudoers.d/{{ ansible_group }}"
+  tags: ansible-client
