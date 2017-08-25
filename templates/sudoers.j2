@@ -1,4 +1,4 @@
 # {{ ansible_managed }}
 Defaults:root !requiretty
-Defaults:%{{ ansible_group }} !requiretty
-{{ ansible_user }} ALL=(ALL) NOPASSWD:ALL
+Defaults:%{{ ansible_client_group }} !requiretty
+{{ ansible_client_user }} ALL=(ALL) NOPASSWD:ALL

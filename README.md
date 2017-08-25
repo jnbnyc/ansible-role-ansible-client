@@ -7,7 +7,7 @@ Requirements
 ------------
 
 This role expects ssh public keys stored as files in a specific directory.
-The `ansible` directory below corresponds to the value specified in `{{ansible_group}}`.
+The `ansible` directory below corresponds to the value specified in `{{ansible_client_group}}`.
 
     ../../ (ansible root directory)
     ├── ansible.cfg
@@ -31,8 +31,8 @@ Role Variables
 You can specify the user and group to create for ansible with these variables.
 Defaults to `ansible`.
 
-    ansible_user: ansible
-    ansible_group: ansible
+    ansible_client_user: ansible
+    ansible_client_group: ansible
 
 Dependencies
 ------------
@@ -44,8 +44,8 @@ Example Playbook
     - hosts: centos_servers
       roles:
         - role: ansible-client
-          ansible_user: centos
-          ansible_group: centos
+          ansible_client_user: centos
+          ansible_client_group: centos
 
 License
 -------

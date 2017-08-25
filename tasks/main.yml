@@ -13,9 +13,9 @@
 
 - name: Installing Keys for ansible user
   become: yes
-  authorized_key: user="{{ ansible_user }}" key="{{ lookup('file', item) }}"
+  authorized_key: user="{{ ansible_client_user }}" key="{{ lookup('file', item) }}"
   with_fileglob:
-    - "../../files/{{ ansible_user }}/*.pub"
+    - "../../files/{{ ansible_client_user }}/*.pub"
   tags: ansible-client
 
 - name: Ensure /etc/sudoers.d exists
@@ -41,5 +41,5 @@
   become: yes
   template:
     src: sudoers.j2
-    dest: "/etc/sudoers.d/{{ ansible_group }}"
+    dest: "/etc/sudoers.d/{{ ansible_client_group }}"
   tags: ansible-client

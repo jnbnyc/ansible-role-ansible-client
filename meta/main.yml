@@ -6,8 +6,8 @@ dependencies:
     src: https://github.com/jnbnyc/ansible-role-service-account.git
     name: service-account
     service_account_opts:
-      user: "{{ ansible_user }}"
-      group: "{{ ansible_group }}"
+      user: "{{ ansible_client_user }}"
+      group: "{{ ansible_client_group }}"
       comment: "Ansible User"
     tags: ansible-client
 
